@@ -32,7 +32,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                     TO(0),          KC_TRANSPARENT,                                 KC_0,           QK_LLCK
   ),
   [3] = LAYOUT_voyager(
-    RGB_TOG,        TOGGLE_LAYER_COLOR,RGB_MODE_FORWARD,RGB_HUI,        RGB_SAI,        RGB_VAI,                                        KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          
+    RGB_TOG,        KC_NO,          RGB_MODE_FORWARD,RGB_HUI,        RGB_SAI,        RGB_VAI,                                        KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          
     KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,                                          RGUI(KC_TAB),   RGUI(KC_8),     RGUI(KC_9),     RGUI(KC_4),     KC_NO,          KC_NO,          
     KC_NO,          KC_NO,          KC_LEFT_ALT,    KC_LEFT_SHIFT,  KC_LEFT_CTRL,   KC_NO,                                          RGUI(RSFT(KC_LEFT)),RGUI(KC_1),     RGUI(KC_2),     RGUI(KC_3),     RGUI(RSFT(KC_RIGHT)),KC_NO,          
     KC_NO,          KC_LEFT_GUI,    KC_NO,          KC_NO,          KC_NO,          KC_NO,                                          KC_NO,          RGUI(KC_7),     RGUI(KC_6),     RGUI(KC_5),     KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,

@@ -1,6 +1,5 @@
 #include QMK_KEYBOARD_H
 #include "version.h"
-#include "i18n.h"
 #define MOON_LED_LEVEL LED_LEVEL
 #define ML_SAFE_RANGE SAFE_RANGE
 
@@ -19,7 +18,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                                     KC_UNDS,        KC_SPACE,                                       KC_NO,          KC_ESCAPE
   ),
   [1] = LAYOUT_voyager(
-    KC_TRANSPARENT, KC_MAC_UNDO,    KC_MAC_PASTE,   LGUI(KC_A),     KC_MAC_COPY,    KC_MAC_CUT,                                     RCTL(KC_PAGE_UP),KC_PGDN,        KC_PAGE_UP,     RCTL(KC_PGDN),  KC_TRANSPARENT, KC_AUDIO_MUTE,  
+    KC_TRANSPARENT, LGUI(KC_Z),     LGUI(KC_V),     LGUI(KC_A),     LGUI(KC_C),     LGUI(KC_X),                                     RCTL(KC_PAGE_UP),KC_PGDN,        KC_PAGE_UP,     RCTL(KC_PGDN),  KC_TRANSPARENT, KC_AUDIO_MUTE,  
     KC_NO,          KC_TRANSPARENT, KC_LABK,        KC_RABK,        KC_BSLS,        KC_GRAVE,                                       KC_AMPR,        KC_NO,          KC_LBRC,        KC_RBRC,        KC_NO,          KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_EXLM,        KC_MINUS,       KC_PLUS,        KC_EQUAL,       KC_HASH,                                        KC_PIPE,        KC_COLN,        KC_LPRN,        KC_RPRN,        KC_PERC,        KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_TRANSPARENT, KC_SLASH,       KC_ASTR,        KC_CIRC,        KC_NO,                                          KC_TILD,        KC_DLR,         KC_LCBR,        KC_RCBR,        KC_TRANSPARENT, KC_TRANSPARENT, 

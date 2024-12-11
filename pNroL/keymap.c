@@ -1,66 +1,103 @@
+// Copyright 2024 Google LLC
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+/**
+ * @file keymap.c
+ * @brief Pascal's keymap for the ZSA Voyager.
+ *
+ * This file defines what keycode is performed by each key position. See also
+ * getreuer.c for definitions of macros, etc. used in my keymap.
+ */
+
 #include QMK_KEYBOARD_H
+
+#include "voyager.h"
+#include "layout.h"
+#include "getreuer_qwerty.c"
+
 #include "version.h"
-#define MOON_LED_LEVEL LED_LEVEL
-#define ML_SAFE_RANGE SAFE_RANGE
 
-enum custom_keycodes {
-  RGB_SLD = ML_SAFE_RANGE,
-};
-
-
-
+// clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [0] = LAYOUT_voyager(
-    KC_GRAVE,       LGUI(KC_TAB),   KC_NO,          KC_DOWN,        KC_UP,          KC_MS_BTN1,                                     KC_HOME,        KC_LEFT,        KC_RIGHT,       KC_END,         KC_DELETE,      KC_MEDIA_PLAY_PAUSE,
-    KC_TAB,         KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,                                           KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           KC_SLASH,       
-    KC_BSPC,        KC_A,           MT(MOD_LALT, KC_S),MT(MOD_LSFT, KC_D),MT(MOD_LCTL, KC_F),KC_G,                                           KC_H,           MT(MOD_RCTL, KC_J),MT(MOD_RSFT, KC_K),MT(MOD_RALT, KC_L),KC_TRANSPARENT, KC_QUOTE,       
-    KC_SCLN,        MT(MOD_LGUI, KC_Z),KC_X,           KC_C,           KC_V,           KC_B,                                           KC_N,           KC_M,           KC_COMMA,       KC_DOT,         MT(MOD_RGUI, KC_SCLN),KC_ENTER,       
-                                                    KC_UNDS,        KC_SPACE,                                       KC_NO,          KC_ESCAPE
+  [BASE] = LAYOUT_LR(  // Base layer: QWERTY.
+    KC_GRV , G(KC_TAB), SELLINE, KC_DOWN, KC_UP  , KC_BTN1,
+    KC_TAB , KC_Q   , KC_W   , KC_E   , KC_R   , KC_T   ,
+    KC_BSPC, SYM_A  , LALT_S , LSFT_D , LCTL_F , KC_G   ,
+    WIN_COL, LGUI_Z , KC_X   , KC_C   , NUM_V  , KC_B   ,
+                                                 KC_UNDS, KC_SPC ,
+
+                      KC_HOME, KC_LEFT, KC_RGHT, KC_END , KC_DEL , KC_MPLY,
+                      KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   , KC_SLSH,
+                      KC_H   , RCTL_J , RSFT_K , RALT_L , SYM_x  , KC_QUOT,
+                      KC_N   , KC_M   , KC_COMM, KC_DOT , RGUI_SC, KC_ENT ,
+             QK_REP , KC_ESC
   ),
-  [1] = LAYOUT_voyager(
-    KC_TRANSPARENT, LGUI(KC_Z),     LGUI(KC_V),     LGUI(KC_A),     LGUI(KC_C),     LGUI(KC_X),                                     RCTL(KC_PAGE_UP),KC_PGDN,        KC_PAGE_UP,     RCTL(KC_PGDN),  KC_TRANSPARENT, KC_AUDIO_MUTE,  
-    KC_NO,          KC_TRANSPARENT, KC_LABK,        KC_RABK,        KC_BSLS,        KC_GRAVE,                                       KC_AMPR,        KC_NO,          KC_LBRC,        KC_RBRC,        KC_NO,          KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_EXLM,        KC_MINUS,       KC_PLUS,        KC_EQUAL,       KC_HASH,                                        KC_PIPE,        KC_COLN,        KC_LPRN,        KC_RPRN,        KC_PERC,        KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_SLASH,       KC_ASTR,        KC_CIRC,        KC_NO,                                          KC_TILD,        KC_DLR,         KC_LCBR,        KC_RCBR,        KC_TRANSPARENT, KC_TRANSPARENT, 
-                                                    KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT
+
+  [SYM] = LAYOUT_LR(  // Symbol layer.
+    _______, G(KC_Z), G(KC_V), G(KC_A), G(KC_C), G(KC_X),
+    TMUXESC, MO(FUN), KC_LABK, KC_RABK, KC_BSLS, KC_GRV ,
+    _______, KC_EXLM, KC_MINS, KC_PLUS, KC_EQL , KC_HASH,
+    _______, _______, KC_SLSH, KC_ASTR, KC_CIRC, USRNAME,
+                                                 _______, _______,
+
+                      C(KC_PGUP), KC_PGDN, KC_PGUP, C(KC_PGDN), _______, KC_MUTE,
+                      KC_AMPR, ARROW  , KC_LBRC, KC_RBRC, SRCHSEL, _______,
+                      KC_PIPE, KC_COLN, KC_LPRN, KC_RPRN, KC_PERC, _______,
+                      KC_TILD, KC_DLR , KC_LCBR, KC_RCBR, _______, _______,
+             _______, _______
   ),
-  [2] = LAYOUT_voyager(
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,                                          KC_TAB,         KC_8,           KC_9,           KC_4,           KC_KP_PLUS,     KC_KP_SLASH,    
-    KC_TRANSPARENT, KC_NO,          KC_LEFT_ALT,    KC_LEFT_SHIFT,  KC_LEFT_CTRL,   KC_NO,                                          KC_COLN,        KC_1,           KC_2,           KC_3,           KC_KP_MINUS,    KC_KP_ASTERISK, 
-    KC_TRANSPARENT, KC_LEFT_GUI,    KC_NO,          KC_LEFT_CTRL,   KC_NO,          KC_NO,                                          KC_KP_COMMA,    KC_7,           KC_6,           KC_5,           KC_KP_DOT,      KC_TRANSPARENT, 
-                                                    TO(0),          KC_TRANSPARENT,                                 KC_0,           QK_LLCK
+
+  [NUM] = LAYOUT_LR(  // Number layer.
+    _______, _______, _______, _______, _______, _______,
+    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    _______, XXXXXXX, KC_LALT, KC_LSFT, KC_LCTL, XXXXXXX,
+    _______, KC_LGUI, XXXXXXX, KC_LCTL, XXXXXXX, XXXXXXX,
+                                                 TO(BASE), _______,
+
+                      _______, _______, _______, _______, _______, _______,
+                      KC_TAB , KC_8   , KC_9   , KC_4   , KC_PPLS, KC_PSLS,
+                      KC_COLN, KC_1   , KC_2   , KC_3   , KC_PMNS, KC_PAST,
+                      KC_PCMM, KC_7   , KC_6   , KC_5   , KC_PDOT, _______,
+             KC_0   , QK_LLCK
   ),
-  [3] = LAYOUT_voyager(
-    RGB_TOG,        KC_NO,          RGB_MODE_FORWARD,RGB_HUI,        RGB_SAI,        RGB_VAI,                                        KC_NO,          KC_TRANSPARENT, KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          
-    KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,                                          RGUI(KC_TAB),   RGUI(KC_8),     RGUI(KC_9),     RGUI(KC_4),     KC_NO,          KC_NO,          
-    KC_NO,          KC_NO,          KC_LEFT_ALT,    KC_LEFT_SHIFT,  KC_LEFT_CTRL,   KC_NO,                                          RGUI(RSFT(KC_LEFT)),RGUI(KC_1),     RGUI(KC_2),     RGUI(KC_3),     RGUI(RSFT(KC_RIGHT)),KC_NO,          
-    KC_NO,          KC_LEFT_GUI,    KC_NO,          KC_NO,          KC_NO,          KC_NO,                                          KC_NO,          RGUI(KC_7),     RGUI(KC_6),     RGUI(KC_5),     KC_AUDIO_VOL_DOWN,KC_AUDIO_VOL_UP,
-                                                    KC_NO,          LGUI(KC_SPACE),                                 KC_NO,          KC_NO
+
+  [WIN] = LAYOUT_LR(  // Window management layer.
+    RGB_TOG, RGB_DEF, RGB_MOD, RGB_HUI, RGB_SAI, RGB_VAI,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    XXXXXXX, XXXXXXX, KC_LALT, KC_LSFT, KC_LCTL, XXXXXXX,
+    XXXXXXX, KC_LGUI, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                                                 XXXXXXX, G(KC_SPC),
+
+                      XXXXXXX, _______, _______, XXXXXXX, XXXXXXX, XXXXXXX,
+                      G(KC_TAB), G(KC_8), G(KC_9), G(KC_4), XXXXXXX, XXXXXXX,
+                      G(S(KC_LEFT)), G(KC_1), G(KC_2), G(KC_3), G(S(KC_RGHT)), XXXXXXX,
+                      XXXXXXX, G(KC_7), G(KC_6), G(KC_5), KC_VOLD, KC_VOLU,
+             QK_REP , XXXXXXX
   ),
-  [4] = LAYOUT_voyager(
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, QK_BOOT,        
-    KC_TRANSPARENT, KC_NO,          KC_NO,          KC_NO,          KC_NO,          KC_NO,                                          KC_NO,          KC_F8,          KC_F9,          KC_F4,          KC_F10,         KC_NO,          
-    KC_TRANSPARENT, KC_NO,          KC_LEFT_ALT,    KC_LEFT_SHIFT,  KC_LEFT_CTRL,   KC_NO,                                          KC_NO,          KC_F1,          KC_F2,          KC_F3,          KC_F11,         KC_NO,          
-    KC_TRANSPARENT, KC_LEFT_GUI,    KC_NO,          KC_NO,          KC_NO,          KC_NO,                                          KC_NO,          KC_F7,          KC_F6,          KC_F5,          KC_F12,         KC_TRANSPARENT, 
-                                                    TO(0),          KC_TRANSPARENT,                                 KC_NO,          QK_LLCK
+
+  [FUN] = LAYOUT_LR(  // Funky fun layer.
+    _______, _______, _______, _______, _______, _______,
+    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    _______, XXXXXXX, KC_LALT, KC_LSFT, KC_LCTL, XXXXXXX,
+    _______, KC_LGUI, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                                                 TO(BASE), _______,
+
+                      _______, _______, _______, _______, _______, QK_BOOT,
+                      XXXXXXX, KC_F8  , KC_F9  , KC_F4  , KC_F10 , XXXXXXX,
+                      XXXXXXX, KC_F1  , KC_F2  , KC_F3  , KC_F11 , XXXXXXX,
+                      XXXXXXX, KC_F7  , KC_F6  , KC_F5  , KC_F12 , _______,
+             XXXXXXX, QK_LLCK
   ),
 };
-
-
-
-
-bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-  switch (keycode) {
-
-    case RGB_SLD:
-      if (record->event.pressed) {
-        rgblight_mode(1);
-      }
-      return false;
-  }
-  return true;
-}
-
-
 

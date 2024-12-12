@@ -31,11 +31,11 @@ NKRO_ENABLE ?= no
 SPACE_CADET_ENABLE ?= no
 TAP_DANCE_ENABLE ?= no
 
-ACHORDION_ENABLE ?= yes
-ifeq ($(strip $(ACHORDION_ENABLE)), yes)
-	OPT_DEFS += -DACHORDION_ENABLE
-	SRC += features/achordion.c
-endif
+# ACHORDION_ENABLE ?= yes
+# ifeq ($(strip $(ACHORDION_ENABLE)), yes)
+# 	OPT_DEFS += -DACHORDION_ENABLE
+# 	SRC += features/achordion.c
+# endif
 
 CUSTOM_SHIFT_KEYS_ENABLE ?= yes
 ifeq ($(strip $(CUSTOM_SHIFT_KEYS_ENABLE)), yes)

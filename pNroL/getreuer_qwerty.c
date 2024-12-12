@@ -42,9 +42,6 @@
  * <https://getreuer.info/posts/keyboards>
  */
 
-#ifdef ACHORDION_ENABLE
-#include "features/achordion.h"
-#endif  // ACHORDION_ENABLE
 #ifdef CUSTOM_SHIFT_KEYS_ENABLE
 #include "features/custom_shift_keys.h"
 #endif  // CUSTOM_SHIFT_KEYS_ENABLE
@@ -557,9 +554,6 @@ void keyboard_post_init_user(void) {
 }
 
 bool process_record_user(uint16_t keycode, keyrecord_t* record) {
-#ifdef ACHORDION_ENABLE
-  if (!process_achordion(keycode, record)) { return false; }
-#endif  // ACHORDION_ENABLE
 #ifdef ORBITAL_MOUSE_ENABLE
   if (!process_orbital_mouse(keycode, record)) { return false; }
 #endif  // ORBITAL_MOUSE_ENABLE
@@ -751,9 +745,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
 }
 
 void matrix_scan_user(void) {
-#ifdef ACHORDION_ENABLE
-  achordion_task();
-#endif  // ACHORDION_ENABLE
 #ifdef ORBITAL_MOUSE_ENABLE
   orbital_mouse_task();
 #endif  // ORBITAL_MOUSE_ENABLE

@@ -13,13 +13,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [0] = LAYOUT_voyager(
     KC_GRAVE,       LGUI(KC_TAB),   KC_NO,          KC_DOWN,        KC_UP,          KC_MS_BTN1,                                     KC_HOME,        KC_LEFT,        KC_RIGHT,       KC_END,         KC_DELETE,      KC_MEDIA_PLAY_PAUSE,
     KC_TAB,         KC_Q,           KC_W,           KC_E,           KC_R,           KC_T,                                           KC_Y,           KC_U,           KC_I,           KC_O,           KC_P,           KC_SLASH,       
-    KC_BSPC,        KC_A,           MT(MOD_LALT, KC_S),MT(MOD_LSFT, KC_D),MT(MOD_LCTL, KC_F),KC_G,                                           KC_H,           MT(MOD_RCTL, KC_J),MT(MOD_RSFT, KC_K),MT(MOD_RALT, KC_L),KC_TRANSPARENT, KC_QUOTE,       
-    KC_SCLN,        MT(MOD_LGUI, KC_Z),KC_X,           KC_C,           KC_V,           KC_B,                                           KC_N,           KC_M,           KC_COMMA,       KC_DOT,         MT(MOD_RGUI, KC_SCLN),KC_ENTER,       
+    KC_BSPC,        LT(1,KC_A),     MT(MOD_LALT, KC_S),MT(MOD_LSFT, KC_D),MT(MOD_LCTL, KC_F),KC_G,                                           KC_H,           MT(MOD_RCTL, KC_J),MT(MOD_RSFT, KC_K),MT(MOD_RALT, KC_L),MO(1),          KC_QUOTE,       
+    LT(3,KC_SCLN),  MT(MOD_LGUI, KC_Z),KC_X,           KC_C,           LT(2,KC_V),     KC_B,                                           KC_N,           KC_M,           KC_COMMA,       KC_DOT,         MT(MOD_RGUI, KC_SCLN),KC_ENTER,       
                                                     KC_UNDS,        KC_SPACE,                                       KC_NO,          KC_ESCAPE
   ),
   [1] = LAYOUT_voyager(
     KC_TRANSPARENT, LGUI(KC_Z),     LGUI(KC_V),     LGUI(KC_A),     LGUI(KC_C),     LGUI(KC_X),                                     RCTL(KC_PAGE_UP),KC_PGDN,        KC_PAGE_UP,     RCTL(KC_PGDN),  KC_TRANSPARENT, KC_AUDIO_MUTE,  
-    KC_NO,          KC_TRANSPARENT, KC_LABK,        KC_RABK,        KC_BSLS,        KC_GRAVE,                                       KC_AMPR,        KC_NO,          KC_LBRC,        KC_RBRC,        KC_NO,          KC_TRANSPARENT, 
+    KC_NO,          MO(4),          KC_LABK,        KC_RABK,        KC_BSLS,        KC_GRAVE,                                       KC_AMPR,        KC_NO,          KC_LBRC,        KC_RBRC,        KC_NO,          KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_EXLM,        KC_MINUS,       KC_PLUS,        KC_EQUAL,       KC_HASH,                                        KC_PIPE,        KC_COLN,        KC_LPRN,        KC_RPRN,        KC_PERC,        KC_TRANSPARENT, 
     KC_TRANSPARENT, KC_TRANSPARENT, KC_SLASH,       KC_ASTR,        KC_CIRC,        KC_NO,                                          KC_TILD,        KC_DLR,         KC_LCBR,        KC_RCBR,        KC_TRANSPARENT, KC_TRANSPARENT, 
                                                     KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT

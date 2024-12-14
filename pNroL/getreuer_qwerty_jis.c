@@ -61,6 +61,7 @@ enum layers {
   NUM,
   WIN,
   FUN,
+  NAV,
 };
 
 enum custom_keycodes {
@@ -138,12 +139,12 @@ enum custom_keycodes {
 #define RCTL_J RCTL_T(KC_J)
 #define RSFT_K RSFT_T(KC_K)
 #define RALT_L LALT_T(KC_L)
-#define SYM_x LT(SYM, KC_I)
+#define SYM_SCL LT(SYM, KC_SCLN)
 #define LGUI_Z LGUI_T(KC_Z)
-#define RGUI_SC RGUI_T(KC_SCLN)
+#define RGUI_SL RGUI_T(KC_SLSH)
 
 #define NUM_V LT(NUM, KC_V)
-#define WIN_COL LT(WIN, KC_SCLN)
+#define WIN_BSL LT(WIN, KC_BSLS)
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -167,12 +168,14 @@ combo_t key_combos[] = {
 ///////////////////////////////////////////////////////////////////////////////
 #ifdef CUSTOM_SHIFT_KEYS_ENABLE
 const custom_shift_key_t custom_shift_keys[] = {
-    {KC_DOT, KC_QUES},
-    {KC_COMM, KC_EXLM},
-    {RGUI_SC, KC_AT  },
+    {KC_MINS, KC_EQL },
+    {KC_CIRC, KC_TILD},
+    {KC_AT  , KC_GRV },
+    {SYM_SCL, KC_PLUS},
+    {KC_COLN, KC_ASTR},
     {KC_MPLY, KC_MNXT},
-    {KC_EQL , KC_EQL },  // Don't shift =
-    {KC_SLSH, KC_SLSH},  // Don't shift /
+    {KC_QUOT, KC_QUOT},  // Don't shift '
+    {KC_DQUO, KC_DQUO},  // Don't shift "
 };
 uint8_t NUM_CUSTOM_SHIFT_KEYS =
     sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
@@ -220,7 +223,7 @@ bool achordion_chord(uint16_t tap_hold_keycode,
   switch (tap_hold_keycode) {
     // Exceptionally allow symbol layer LTs + row 0 in same-hand chords.
     case SYM_A:
-    case SYM_x:
+    case SYM_SCL:
       if (row == 0) { return true; }
       break;
     // Exceptionally allow V + C as a same-hand chord.
@@ -248,7 +251,7 @@ uint16_t achordion_streak_chord_timeout(
 
   // Exceptions so that certain hotkeys don't get blocked as streaks.
   switch (tap_hold_keycode) {
-    case RGUI_SC:
+    case RGUI_SL:
       if (next_keycode == KC_C || next_keycode == KC_V) {
         return 0;
       }
@@ -468,7 +471,7 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
       case KC_F:
       case NUM_V:
       case KC_X:
-      case RGUI_SC:
+      case RGUI_SL:
         return M_NOOP;
 
       case KC_PLUS:
@@ -625,27 +628,27 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     // Tap behavior:
     //  * Unmodified:       :
     //  * With Shift:       std:: (C++, Rust)
-    case WIN_COL:
-      if (record->tap.count) {
-        static bool registered = false;
+    // case WIN_BSL:
+    //   if (record->tap.count) {
+    //     static bool registered = false;
 
-        if (record->event.pressed) {
-          if (registered) {  // Invoked through Repeat key.
-            unregister_code16(KC_COLN);
-          } else if (shift_mods) {
-            clear_mods();
-            SEND_STRING_DELAY("std:", TAP_CODE_DELAY);
-            set_mods(mods);
-          }
-          register_code16(KC_COLN);
-          registered = true;
-        } else {
-          unregister_code16(KC_COLN);
-          registered = false;
-        }
-        return false;
-      }
-      return true;
+    //     if (record->event.pressed) {
+    //       if (registered) {  // Invoked through Repeat key.
+    //         unregister_code16(KC_COLN);
+    //       } else if (shift_mods) {
+    //         clear_mods();
+    //         SEND_STRING_DELAY("std:", TAP_CODE_DELAY);
+    //         set_mods(mods);
+    //       }
+    //       register_code16(KC_COLN);
+    //       registered = true;
+    //     } else {
+    //       unregister_code16(KC_COLN);
+    //       registered = false;
+    //     }
+    //     return false;
+    //   }
+    //   return true;
   }
 
   if (record->event.pressed) {

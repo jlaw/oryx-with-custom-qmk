@@ -24,23 +24,23 @@
 
 #include "voyager.h"
 #include "layout.h"
-#include "getreuer_qwerty.c"
+#include "getreuer_qwerty_jis.c"
 
 #include "version.h"
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT_LR(  // Base layer: QWERTY.
-    KC_GRV , G(KC_TAB), SELLINE, KC_DOWN, KC_UP  , KC_BTN1,
+    _______, _______, KC_MINS, KC_QUOT, _______, _______,
     KC_TAB , KC_Q   , KC_W   , KC_E   , KC_R   , KC_T   ,
     KC_BSPC, SYM_A  , LALT_S , LSFT_D , LCTL_F , KC_G   ,
-    WIN_COL, LGUI_Z , KC_X   , KC_C   , NUM_V  , KC_B   ,
+    WIN_BSL, LGUI_Z , KC_X   , KC_C   , NUM_V  , KC_B   ,
                                                  KC_UNDS, KC_SPC ,
 
-                      KC_HOME, KC_LEFT, KC_RGHT, KC_END , KC_DEL , KC_MPLY,
-                      KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   , KC_SLSH,
-                      KC_H   , RCTL_J , RSFT_K , RALT_L , SYM_x  , KC_QUOT,
-                      KC_N   , KC_M   , KC_COMM, KC_DOT , RGUI_SC, KC_ENT ,
+                      _______, _______, KC_DQUO, KC_CIRC, _______, KC_MPLY,
+                      KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   , KC_AT  ,
+                      KC_H   , RCTL_J , RSFT_K , RALT_L , SYM_SCL, KC_COLN,
+                      KC_N   , KC_M   , KC_COMM, KC_DOT , RGUI_SL, KC_ENT ,
              QK_REP , KC_ESC
   ),
 
@@ -99,12 +99,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                       XXXXXXX, KC_F7  , KC_F6  , KC_F5  , KC_F12 , _______,
              XXXXXXX, QK_LLCK
   ),
-  [5] = LAYOUT_voyager(
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_UP,          KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_LEFT,        KC_DOWN,        KC_RIGHT,       KC_TRANSPARENT, KC_TRANSPARENT, 
-    KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, KC_TRANSPARENT, 
-                                                    KC_TRANSPARENT, KC_TRANSPARENT,                                 KC_TRANSPARENT, KC_TRANSPARENT
+
+  [NAV] = LAYOUT_LR(  // Navigation layer.
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    _______, XXXXXXX, KC_LALT, KC_LSFT, KC_LCTL, XXXXXXX,
+    XXXXXXX, KC_LGUI, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                                                 XXXXXXX, _______,
+
+                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+                      XXXXXXX, XXXXXXX, KC_UP  , XXXXXXX, XXXXXXX, XXXXXXX,
+                      XXXXXXX, KC_LEFT, KC_DOWN, KC_RGHT, XXXXXXX, XXXXXXX,
+                      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,
+             XXXXXXX, XXXXXXX
   ),
 };
 

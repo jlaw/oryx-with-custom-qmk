@@ -145,6 +145,7 @@ enum custom_keycodes {
 
 #define NUM_V LT(NUM, KC_V)
 #define WIN_BSL LT(WIN, KC_BSLS)
+#define NAV_ESC LT(NAV, KC_ESC)
 
 
 ///////////////////////////////////////////////////////////////////////////////

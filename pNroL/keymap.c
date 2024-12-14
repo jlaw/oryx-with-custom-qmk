@@ -41,7 +41,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                       KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   , KC_AT  ,
                       KC_H   , RCTL_J , RSFT_K , RALT_L , SYM_SCL, KC_COLN,
                       KC_N   , KC_M   , KC_COMM, KC_DOT , RGUI_SL, KC_ENT ,
-             QK_REP , KC_ESC
+             QK_REP , NAV_ESC
   ),
 
   [SYM] = LAYOUT_LR(  // Symbol layer.

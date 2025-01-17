@@ -175,8 +175,9 @@ const custom_shift_key_t custom_shift_keys[] = {
     {RGUI_SC, KC_PLUS},
     {KC_COLN, KC_ASTR},
     {KC_MPLY, KC_MNXT},
+    {KC_EQL , KC_EQL },  // Don't shift =
     {KC_QUOT, KC_QUOT},  // Don't shift '
-    {KC_DQUO, KC_DQUO},  // Don't shift "
+    {KC_GRV , KC_GRV },  // Don't shift `
 };
 uint8_t NUM_CUSTOM_SHIFT_KEYS =
     sizeof(custom_shift_keys) / sizeof(custom_shift_key_t);
@@ -201,6 +202,8 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t* record) {
   // lead to missed triggers in fast typing. Here, returning 0 means we
   // instead want to "force hold" and disable key repeating.
   switch (keycode) {
+    case LCTL_BS:
+    case SYM_SPC:
     case KC_H:
     case RCTL_J:
     case RSFT_K:
@@ -224,17 +227,17 @@ bool achordion_chord(uint16_t tap_hold_keycode,
   uint8_t row = other_record->event.key.row % (MATRIX_ROWS / 2);
   if (!(1 <= row && row <= 3)) { return true; }
 
-  switch (tap_hold_keycode) {
-    // Exceptionally allow symbol layer LTs + row 0 in same-hand chords.
-    case LGUI_A:
-    case RGUI_SC:
-      if (row == 0) { return true; }
-      break;
-    // Exceptionally allow V + C as a same-hand chord.
-    case KC_V:
-      if (other_keycode == KC_C) { return true; }
-      break;
-  }
+  // switch (tap_hold_keycode) {
+  //   // Exceptionally allow symbol layer LTs + row 0 in same-hand chords.
+  //   case LGUI_A:
+  //   case RGUI_SC:
+  //     if (row == 0) { return true; }
+  //     break;
+  //   // Exceptionally allow V + C as a same-hand chord.
+  //   case KC_V:
+  //     if (other_keycode == KC_C) { return true; }
+  //     break;
+  // }
 
   return achordion_opposite_hands(tap_hold_record, other_record);
 }
@@ -262,6 +265,11 @@ uint16_t achordion_streak_chord_timeout(
       break;
     case LGUI_A:
       if (next_keycode == KC_N) {
+        return 0;
+      }
+      break;
+    case LCTL_F:
+      if (next_keycode == NUM_G) {
         return 0;
       }
       break;
@@ -632,7 +640,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
     // Tap behavior:
     //  * Unmodified:       :
     //  * With Shift:       std:: (C++, Rust)
-    // case WIN_BSL:
+    // case WIN_COL:
     //   if (record->tap.count) {
     //     static bool registered = false;
 
@@ -680,7 +688,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t* record) {
       case USRNAME:
         add_oneshot_mods(shift_mods);
         clear_mods();
-        SEND_STRING_DELAY("jaxn", TAP_CODE_DELAY);
+        SEND_STRING_DELAY("getreuer", TAP_CODE_DELAY);
         set_mods(mods);
         return false;
 

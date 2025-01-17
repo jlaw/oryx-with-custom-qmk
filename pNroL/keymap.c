@@ -31,13 +31,13 @@
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT_LR(  // Base layer: QWERTY.
-    _______, _______, _______, KC_QUOT, _______, _______,
+    _______, _______, _______, KC_LEFT, KC_RGHT, _______,
     KC_TAB , KC_Q   , KC_W   , KC_E   , KC_R   , KC_T   ,
     LCTL_BS, LGUI_A , LALT_S , LSFT_D , LCTL_F , NUM_G  ,
     WIN_BSL, KC_Z   , KC_X   , KC_C   , KC_V   , KC_B   ,
                                                  KC_UNDS, SYM_SPC,
 
-                      _______, _______, KC_DQUO, KC_MINS, KC_CIRC, KC_MPLY,
+                      _______, KC_DOWN, KC_UP  , KC_MINS, KC_CIRC, KC_MPLY,
                       KC_Y   , KC_U   , KC_I   , KC_O   , KC_P   , KC_AT  ,
                       KC_H   , RCTL_J , RSFT_K , RALT_L , RGUI_SC, KC_COLN,
                       KC_N   , KC_M   , KC_COMM, KC_DOT , KC_SLSH, KC_ENT ,
@@ -46,16 +46,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [SYM] = LAYOUT_LR(  // Symbol layer
     _______, _______, _______, _______, _______, _______,
-    TMUXESC, MO(FUN), _______, _______, _______, _______,
-    _______, KC_EXLM, KC_HASH, KC_DLR , KC_PERC, KC_AMPR,
-    G(KC_A), G(KC_Z), G(KC_X), G(KC_C), G(KC_V), USRNAME,
+    TMUXESC, MO(FUN), KC_DQUO, _______, _______, _______,
+    KC_DEL , KC_EXLM, KC_HASH, KC_DLR , KC_PERC, KC_AMPR,
+    G(KC_A), G(KC_Z), G(KC_X), G(KC_C), G(KC_V), SELLINE,
                                                  _______, _______,
 
                       _______, _______, _______, _______, _______, KC_MUTE,
-                      _______, _______, KC_LBRC, KC_RBRC, SRCHSEL, _______,
+                      _______, KC_QUOT, KC_LBRC, KC_RBRC, SRCHSEL, _______,
                       _______, _______, KC_LPRN, KC_RPRN, _______, _______,
                       _______, _______, KC_LCBR, KC_RCBR, _______, _______,
-             _______, _______
+             _______, C(KC_C)
   ),
 
   [NUM] = LAYOUT_LR(  // Number layer.
@@ -103,8 +103,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [NAV] = LAYOUT_LR(  // Navigation layer.
     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
     _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
-    _______, XXXXXXX, KC_LALT, KC_LSFT, KC_LCTL, XXXXXXX,
-    XXXXXXX, KC_LGUI, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+    _______, KC_LGUI, KC_LALT, KC_LSFT, KC_LCTL, XXXXXXX,
+    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
                                                  XXXXXXX, _______,
 
                       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,

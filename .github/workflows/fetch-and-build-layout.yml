@@ -49,6 +49,10 @@ jobs:
           unzip -oj source.zip '*_source/*' -d ${{ github.event.inputs.layout_id }}
           rm source.zip
 
+      - name: Fix formatting
+        run: |
+          ./format.sh ${{ github.event.inputs.layout_id }}
+
       - name: Commit and Push changes
         run: |
           git config --local user.name "github-actions"

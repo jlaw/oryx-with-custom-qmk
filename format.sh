@@ -1,3 +1,6 @@
+#!/bin/sh
+
+layout=$1
 awk '
 {
     # Detect if the line matches the desired pattern
@@ -47,60 +50,60 @@ END {
                 print "                      " second_lines[i]
         }
     }
-}' pNroL/keymap.c >pNroL/keymap.tmp && mv pNroL/keymap.tmp pNroL/keymap.c
+}' "$layout"/keymap.c >"$layout"/keymap.tmp && mv "$layout"/keymap.tmp "$layout"/keymap.c
 
-sed -i '' "s/LAYOUT_voyager/LAYOUT_LR/g" pNroL/keymap.c
-sed -i '' "s/\[0\]/\[BASE\]/g" pNroL/keymap.c
-sed -i '' "s/\[1\]/\[SYM\]/g" pNroL/keymap.c
-sed -i '' "s/\[2\]/\[NUM\]/g" pNroL/keymap.c
-sed -i '' "s/\[3\]/\[WIN\]/g" pNroL/keymap.c
-sed -i '' "s/\[4\]/\[FUN\]/g" pNroL/keymap.c
-sed -i '' "s/KC_MS_BTN1/KC_BTN1/g" pNroL/keymap.c
-sed -i '' "s/KC_MEDIA_PLAY_PAUSE/KC_MPLY/g" pNroL/keymap.c
-sed -i '' "s/KC_QUOTE/KC_QUOT/g" pNroL/keymap.c
-sed -i '' "s/KC_ENTER/KC_ENT/g" pNroL/keymap.c
-sed -i '' -EH "s/KC_KP_PLUS(,?)/KC_PPLS\1   /g" pNroL/keymap.c
-sed -i '' -EH "s/KC_KP_MINUS(,?)/KC_PMNS\1    /g" pNroL/keymap.c
-sed -i '' -EH "s/KC_KP_SLASH(,?)/KC_PSLS\1    /g" pNroL/keymap.c
-sed -i '' -EH "s/KC_KP_ASTERISK(,?)/KC_PAST\1       /g" pNroL/keymap.c
-sed -i '' -EH "s/KC_KP_COMMA(,?)/KC_PCMM\1    /g" pNroL/keymap.c
-sed -i '' -EH "s/KC_KP_DOT(,?)/KC_PDOT\1  /g" pNroL/keymap.c
+sed -i '' "s/LAYOUT_voyager/LAYOUT_LR/g" "$layout"/keymap.c
+sed -i '' "s/\[0\]/\[BASE\]/g" "$layout"/keymap.c
+sed -i '' "s/\[1\]/\[SYM\]/g" "$layout"/keymap.c
+sed -i '' "s/\[2\]/\[NUM\]/g" "$layout"/keymap.c
+sed -i '' "s/\[3\]/\[WIN\]/g" "$layout"/keymap.c
+sed -i '' "s/\[4\]/\[FUN\]/g" "$layout"/keymap.c
+sed -i '' "s/KC_MS_BTN1/KC_BTN1/g" "$layout"/keymap.c
+sed -i '' "s/KC_MEDIA_PLAY_PAUSE/KC_MPLY/g" "$layout"/keymap.c
+sed -i '' "s/KC_QUOTE/KC_QUOT/g" "$layout"/keymap.c
+sed -i '' "s/KC_ENTER/KC_ENT/g" "$layout"/keymap.c
+sed -i '' -EH "s/KC_KP_PLUS(,?)/KC_PPLS\1   /g" "$layout"/keymap.c
+sed -i '' -EH "s/KC_KP_MINUS(,?)/KC_PMNS\1    /g" "$layout"/keymap.c
+sed -i '' -EH "s/KC_KP_SLASH(,?)/KC_PSLS\1    /g" "$layout"/keymap.c
+sed -i '' -EH "s/KC_KP_ASTERISK(,?)/KC_PAST\1       /g" "$layout"/keymap.c
+sed -i '' -EH "s/KC_KP_COMMA(,?)/KC_PCMM\1    /g" "$layout"/keymap.c
+sed -i '' -EH "s/KC_KP_DOT(,?)/KC_PDOT\1  /g" "$layout"/keymap.c
 
-sed -i '' "s/KC_TRANSPARENT,/_______,       /g" pNroL/keymap.c
-sed -i '' "s/KC_TRANSPARENT/_______/g" pNroL/keymap.c
-sed -i '' "s/KC_NO,  /XXXXXXX,/g" pNroL/keymap.c
-sed -i '' "s/KC_NO/XXXXXXX/g" pNroL/keymap.c
+sed -i '' "s/KC_TRANSPARENT,/_______,       /g" "$layout"/keymap.c
+sed -i '' "s/KC_TRANSPARENT/_______/g" "$layout"/keymap.c
+sed -i '' "s/KC_NO,  /XXXXXXX,/g" "$layout"/keymap.c
+sed -i '' "s/KC_NO/XXXXXXX/g" "$layout"/keymap.c
 
-sed -i '' "s/LEFT_GUI,/LGUI,    /g" pNroL/keymap.c
-sed -i '' "s/LEFT_ALT,/LALT,    /g" pNroL/keymap.c
-sed -i '' "s/LEFT_SHIFT,/LSFT,      /g" pNroL/keymap.c
-sed -i '' "s/LEFT_CTRL,/LCTL,     /g" pNroL/keymap.c
+sed -i '' "s/LEFT_GUI,/LGUI,    /g" "$layout"/keymap.c
+sed -i '' "s/LEFT_ALT,/LALT,    /g" "$layout"/keymap.c
+sed -i '' "s/LEFT_SHIFT,/LSFT,      /g" "$layout"/keymap.c
+sed -i '' "s/LEFT_CTRL,/LCTL,     /g" "$layout"/keymap.c
 
-sed -i '' "s/TO(0),   /TO(BASE),/g" pNroL/keymap.c
+sed -i '' "s/TO(0),   /TO(BASE),/g" "$layout"/keymap.c
 
-sed -i '' -EH "s/[LR]GUI(\(.+?\),)/G\1   /g" pNroL/keymap.c
-sed -i '' -EH "s/[LR]SFT(\(.+?\),)/S\1   /g" pNroL/keymap.c
-sed -i '' -EH "s/[LR]ALT(\(.+?\),)/A\1   /g" pNroL/keymap.c
-sed -i '' -EH "s/[LR]CTL(\(.+?\),)/C\1   /g" pNroL/keymap.c
+sed -i '' -EH "s/[LR]GUI(\(.+?\),)/G\1   /g" "$layout"/keymap.c
+sed -i '' -EH "s/[LR]SFT(\(.+?\),)/S\1   /g" "$layout"/keymap.c
+sed -i '' -EH "s/[LR]ALT(\(.+?\),)/A\1   /g" "$layout"/keymap.c
+sed -i '' -EH "s/[LR]CTL(\(.+?\),)/C\1   /g" "$layout"/keymap.c
 
-sed -i '' -EH "s/AUDIO_//g" pNroL/keymap.c
+sed -i '' -EH "s/AUDIO_//g" "$layout"/keymap.c
 
-sed -i '' -EH "s/VOL_DOWN(,?)/VOLD\1        /g" pNroL/keymap.c
-sed -i '' -EH "s/VOL_UP(,?)/VOLU\1  /g" pNroL/keymap.c
-sed -i '' -EH "s/SPACE/SPC/g" pNroL/keymap.c
-sed -i '' -EH "s/ESCAPE(,?)/ESC\1   /g" pNroL/keymap.c
-sed -i '' -EH "s/GRAVE(,?)/GRV\1  /g" pNroL/keymap.c
-sed -i '' -EH "s/DELETE(,?)/DEL\1   /g" pNroL/keymap.c
-sed -i '' -EH "s/RIGHT/RGHT /g" pNroL/keymap.c
-sed -i '' -EH "s/MINUS(,?)/MINS\1 /g" pNroL/keymap.c
-sed -i '' -EH "s/ASTERISK(,?)/ASTR\1    /g" pNroL/keymap.c
-sed -i '' -EH "s/SLASH(,?)/SLSH\1 /g" pNroL/keymap.c
-sed -i '' -EH "s/COMMA(,?)/COMM\1 /g" pNroL/keymap.c
-sed -i '' -EH "s/RGB_MODE_FORWARD(,?)/UG_NEXT\1        /g" pNroL/keymap.c
-sed -i '' -EH "s/PAGE_UP/PGUP/g" pNroL/keymap.c
-sed -i '' -EH "s/EQUAL(,?)/EQL\1  /g" pNroL/keymap.c
+sed -i '' -EH "s/VOL_DOWN(,?)/VOLD\1        /g" "$layout"/keymap.c
+sed -i '' -EH "s/VOL_UP(,?)/VOLU\1  /g" "$layout"/keymap.c
+sed -i '' -EH "s/SPACE/SPC/g" "$layout"/keymap.c
+sed -i '' -EH "s/ESCAPE(,?)/ESC\1   /g" "$layout"/keymap.c
+sed -i '' -EH "s/GRAVE(,?)/GRV\1  /g" "$layout"/keymap.c
+sed -i '' -EH "s/DELETE(,?)/DEL\1   /g" "$layout"/keymap.c
+sed -i '' -EH "s/RIGHT/RGHT /g" "$layout"/keymap.c
+sed -i '' -EH "s/MINUS(,?)/MINS\1 /g" "$layout"/keymap.c
+sed -i '' -EH "s/ASTERISK(,?)/ASTR\1    /g" "$layout"/keymap.c
+sed -i '' -EH "s/SLASH(,?)/SLSH\1 /g" "$layout"/keymap.c
+sed -i '' -EH "s/COMMA(,?)/COMM\1 /g" "$layout"/keymap.c
+sed -i '' -EH "s/RGB_MODE_FORWARD(,?)/UG_NEXT\1        /g" "$layout"/keymap.c
+sed -i '' -EH "s/PAGE_UP/PGUP/g" "$layout"/keymap.c
+sed -i '' -EH "s/EQUAL(,?)/EQL\1  /g" "$layout"/keymap.c
 
-sed -i '' -EH "s/,\s+$/,/g" pNroL/keymap.c
-sed -i '' -EH "s/,        /, /g" pNroL/keymap.c
-sed -i '' -EH "s/,(\s+)\s/\1, /g" pNroL/keymap.c
-sed -i '' -EH "s/                                                    /                                                 /g" pNroL/keymap.c
+sed -i '' -EH "s/,\s+$/,/g" "$layout"/keymap.c
+sed -i '' -EH "s/,        /, /g" "$layout"/keymap.c
+sed -i '' -EH "s/,(\s+)\s/\1, /g" "$layout"/keymap.c
+sed -i '' -EH "s/                                                    /                                                 /g" "$layout"/keymap.c

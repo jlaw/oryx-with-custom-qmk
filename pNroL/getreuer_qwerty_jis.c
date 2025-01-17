@@ -132,18 +132,18 @@ enum custom_keycodes {
 #define MAGIC QK_AREP
 
 // Short aliases for home row mods and other tap-hold keys.
-#define SYM_A LT(SYM, KC_A)
+#define SYM_SPC LT(SYM, KC_SPC)
 #define LALT_S LALT_T(KC_S)
 #define LSFT_D LSFT_T(KC_D)
 #define LCTL_F LCTL_T(KC_F)
 #define RCTL_J RCTL_T(KC_J)
 #define RSFT_K RSFT_T(KC_K)
 #define RALT_L LALT_T(KC_L)
-#define SYM_SCL LT(SYM, KC_SCLN)
-#define LGUI_Z LGUI_T(KC_Z)
-#define RGUI_SL RGUI_T(KC_SLSH)
+#define LCTL_BS LCTL_T(KC_BSPC)
+#define LGUI_A LGUI_T(KC_A)
+#define RGUI_SC RGUI_T(KC_SCLN)
 
-#define NUM_V LT(NUM, KC_V)
+#define NUM_G LT(NUM, KC_G)
 #define WIN_BSL LT(WIN, KC_BSLS)
 #define NAV_ESC LT(NAV, KC_ESC)
 
@@ -153,8 +153,8 @@ enum custom_keycodes {
 ///////////////////////////////////////////////////////////////////////////////
 const uint16_t caps_combo[] PROGMEM = {KC_C, KC_COMM, COMBO_END};
 const uint16_t c_x_combo[] PROGMEM = {KC_C, KC_X, COMBO_END};
-const uint16_t c_v_combo[] PROGMEM = {KC_C, NUM_V, COMBO_END};
-const uint16_t f_g_combo[] PROGMEM = {LCTL_F, KC_G, COMBO_END};
+const uint16_t c_v_combo[] PROGMEM = {KC_C, KC_V, COMBO_END};
+const uint16_t f_g_combo[] PROGMEM = {LCTL_F, NUM_G, COMBO_END};
 // clang-format off
 combo_t key_combos[] = {
     COMBO(caps_combo, CW_TOGG),          // C and , => activate Caps Word.
@@ -172,7 +172,7 @@ const custom_shift_key_t custom_shift_keys[] = {
     {KC_MINS, KC_EQL },
     {KC_CIRC, KC_TILD},
     {KC_AT  , KC_GRV },
-    {SYM_SCL, KC_PLUS},
+    {RGUI_SC, KC_PLUS},
     {KC_COLN, KC_ASTR},
     {KC_MPLY, KC_MNXT},
     {KC_QUOT, KC_QUOT},  // Don't shift '
@@ -201,7 +201,10 @@ uint16_t get_quick_tap_term(uint16_t keycode, keyrecord_t* record) {
   // lead to missed triggers in fast typing. Here, returning 0 means we
   // instead want to "force hold" and disable key repeating.
   switch (keycode) {
+    case KC_H:
     case RCTL_J:
+    case RSFT_K:
+    case RALT_L:
       return QUICK_TAP_TERM;  // Enable key repeating.
     default:
       return 0;  // Otherwise, force hold and disable key repeating.
@@ -223,12 +226,12 @@ bool achordion_chord(uint16_t tap_hold_keycode,
 
   switch (tap_hold_keycode) {
     // Exceptionally allow symbol layer LTs + row 0 in same-hand chords.
-    case SYM_A:
-    case SYM_SCL:
+    case LGUI_A:
+    case RGUI_SC:
       if (row == 0) { return true; }
       break;
     // Exceptionally allow V + C as a same-hand chord.
-    case NUM_V:
+    case KC_V:
       if (other_keycode == KC_C) { return true; }
       break;
   }
@@ -252,12 +255,12 @@ uint16_t achordion_streak_chord_timeout(
 
   // Exceptions so that certain hotkeys don't get blocked as streaks.
   switch (tap_hold_keycode) {
-    case RGUI_SL:
+    case RGUI_SC:
       if (next_keycode == KC_C || next_keycode == KC_V) {
         return 0;
       }
       break;
-    case LGUI_Z:
+    case LGUI_A:
       if (next_keycode == KC_N) {
         return 0;
       }
@@ -397,7 +400,7 @@ bool remember_last_key_user(uint16_t keycode, keyrecord_t* record,
 uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
   if ((mods & MOD_MASK_GUI)) {
     switch (keycode) {
-      case SYM_A: return G(KC_C);  // Cmd+A -> Cmd+C
+      case LGUI_A: return G(KC_C);  // Cmd+A -> Cmd+C
       case KC_C: return G(KC_V);    // Cmd+C -> Cmd+V
     }
   } else if ((mods & ~MOD_MASK_SHIFT) == 0) {
@@ -419,7 +422,7 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
       // case KC_N: return KC_N;
 
       // Fix SFBs and awkward strokes.
-      case SYM_A: return KC_O;       // A -> O
+      case LGUI_A: return KC_O;       // A -> O
       case KC_O: return KC_A;         // O -> A
       case KC_E: return KC_U;       // E -> U
       case KC_U: return KC_E;         // U -> E
@@ -435,7 +438,7 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
 
       case KC_C: return KC_Y;         // C -> Y
       case LSFT_D: return KC_Y;       // D -> Y
-      case KC_G: return KC_Y;        // G -> Y
+      case NUM_G: return KC_Y;        // G -> Y
       case KC_P: return KC_Y;         // P -> Y
       case KC_Y: return KC_P;         // Y -> P
 
@@ -470,9 +473,9 @@ uint16_t get_alt_repeat_key_keycode_user(uint16_t keycode, uint8_t mods) {
         return KC_SLSH;  // / -> / (easier reach than Repeat)
 
       case KC_F:
-      case NUM_V:
+      case KC_V:
       case KC_X:
-      case RGUI_SL:
+      case RGUI_SC:
         return M_NOOP;
 
       case KC_PLUS:
